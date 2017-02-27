@@ -127,7 +127,7 @@ class RCTCameraViewFinder extends TextureView implements TextureView.SurfaceText
                 _camera = RCTCamera.getInstance().acquireCameraInstance(_cameraType);
                 Camera.Parameters parameters = _camera.getParameters();
                 // set autofocus
-                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_EDOF);
+                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_INFINITY);
                 // set picture size
                 // defaults to max available size
                 List<Camera.Size> supportedSizes;
