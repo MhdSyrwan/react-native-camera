@@ -127,7 +127,7 @@ class RCTCameraViewFinder extends TextureView implements TextureView.SurfaceText
                 _camera = RCTCamera.getInstance().acquireCameraInstance(_cameraType);
                 Camera.Parameters parameters = _camera.getParameters();
                 // set autofocus
-                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_MACRO);
+                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_FIXED);
                 // set picture size
                 // defaults to max available size
                 List<Camera.Size> supportedSizes;
@@ -157,12 +157,6 @@ class RCTCameraViewFinder extends TextureView implements TextureView.SurfaceText
                 stopCamera();
             } finally {
                 _isStarting = false;
-                _camera.autoFocus(new Camera.AutoFocusCallback() {
-                    @Override
-                    public void onAutoFocus(boolean b, Camera camera) {
-                        // currently set to auto-focus on single touch
-                    }
-                });
             }
         }
     }
@@ -373,14 +367,14 @@ class RCTCameraViewFinder extends TextureView implements TextureView.SurfaceText
         float y = event.getY(pointerIndex);
 
         List<String> supportedFocusModes = params.getSupportedFocusModes();
-        if (supportedFocusModes != null && supportedFocusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)) {
-            _camera.autoFocus(new Camera.AutoFocusCallback() {
-                @Override
-                public void onAutoFocus(boolean b, Camera camera) {
-                    // currently set to auto-focus on single touch
-                }
-            });
-        }
+        // if (supportedFocusModes != null && supportedFocusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)) {
+        //     _camera.autoFocus(new Camera.AutoFocusCallback() {
+        //         @Override
+        //         public void onAutoFocus(boolean b, Camera camera) {
+        //             // currently set to auto-focus on single touch
+        //         }
+        //     });
+        // }
     }
 
     /** Determine the space between the first two fingers */
